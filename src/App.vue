@@ -2,7 +2,7 @@
   <div class="app">
     <header>
       <h1>The <strong>Movie</strong> Database</h1>
-      <form class="search-box" v-on:submit="handleSearch">
+      <form class="search-box" v-on:submit.prevent="handleSearch">
         <input 
           type="search"
           class="search-field"
@@ -32,10 +32,10 @@
 
 
   const handleSearch = async ()=>{
-    movieList.value = await fetch(`https://api.themoviedb.org/3/search/movie?query=${ search_query.value}&include_adult=false&language=ko-KR&page=1&api_key=45fcb150351f5049358ecdb91b91b4e0`)
+    movieList.value = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search_query.value}&include_adult=false&language=ko-KR&page=1&api_key=45fcb150351f5049358ecdb91b91b4e0`)
       .then(response => response.json())  
       .then(data =>data.results)
-
+      console.log('받아온 데이타- ',search_query.value)
       search_query.value = ''
   }
 
@@ -50,6 +50,9 @@
       console.log('받아온 데이타- ',movieList.value)
   }
 
+  
+  
+    popular()
   
 
 </script>
